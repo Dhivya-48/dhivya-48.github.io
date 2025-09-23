@@ -1,0 +1,10 @@
+{
+  "name": "portfolio",
+  "scripts": {
+    "start": "node -e \"console.log('Open index.html in a browser to view the portfolio')\""
+  },
+  "dependencies": {}
+    "typescript-eslint": "^8.43.0",
+    "vite": "^7.1.6"
+  }
+}
