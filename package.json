@@ -1,10 +1,10 @@
 {
   "name": "portfolio",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node -e \"console.log('Open index.html in a browser to view the portfolio')\""
+    "start": "echo \"Open index.html in a browser to view the portfolio\""
   },
-  "dependencies": {}
-    "typescript-eslint": "^8.43.0",
+  "devDependencies": {
     "vite": "^7.1.6"
   }
 }
