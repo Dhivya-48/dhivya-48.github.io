@@ -16,6 +16,9 @@
   --card-border: rgba(255,255,255,0.03);
   /* stronger combined shadow for dark theme: deep drop shadow + subtle cyan glow */
   --card-hover-shadow: 0 24px 48px rgba(2,6,23,0.72), 0 12px 36px rgba(56,189,248,0.12), 0 2px 0 rgba(255,255,255,0.02);
+  /* scroll-driven variables */
+  --scroll-y: 0; /* used by JS (number, interpreted as px in calc) */
+  --hero-translate: 0; /* small translate applied to `.hero` */
 }
 
 /* Light theme overrides */
@@ -38,41 +41,100 @@
   --card-hover-shadow: 0 14px 28px rgba(2,6,23,0.08);
 }
 *{box-sizing:border-box}
-html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:var(--text);background:var(--bg);transition:background 240ms ease,color 240ms ease}
-.container{max-width:1050px;margin:0 auto;padding:24px}
+.html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:var(--text);background:var(--bg);transition:background 240ms ease,color 240ms ease}
+.container{max-width:1050px;margin:0 auto;padding:12px}
 .site-header{backdrop-filter: blur(6px);position:sticky;top:0;z-index:40;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
 .logo{margin:0;font-size:1.1rem;color:var(--accent)}
+.brand{display:flex;align-items:center;gap:12px}
 .nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-.hero{padding:48px 0}
+.nav-resume{margin-left:14px;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid var(--card-border);color:var(--text);font-weight:600;text-decoration:none}
+.nav-resume:hover{opacity:0.95}
+.hero{padding:12px 0; min-height:24vh; display:flex; align-items:center}
 .hero-inner{display:flex;gap:24px;align-items:center}
-.hero-left{flex:1}
-.hero{padding:28px 0;min-height:40vh;display:flex;align-items:center}
-.hero-inner{display:flex;gap:18px;align-items:center}
+.hero-right{flex:0 0 180px;display:flex;justify-content:center}
+.hero-left{flex:1;padding-left:12px}
 .hero{background:radial-gradient(1000px 400px at 10% 0%, rgba(56,189,248,0.04), transparent), linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
 
-.profile-card{display:flex;flex-direction:column;align-items:center;background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:14px}
-.profile-card .avatar{width:120px;height:120px;border-radius:9999px;border:3px solid rgba(255,255,255,0.04);object-fit:cover}
+/* Apply a subtle parallax translate to the hero driven by JS */
+.hero{transform: translateY(calc(var(--hero-translate, 0) * 1px)); will-change: transform}
+
+/* tighter hero spacing for a more professional layout */
+.hero-left h2{margin:0 0 6px 0;font-size:1.95rem;letter-spacing:0.2px}
+.tagline{margin-bottom:12px;font-size:0.97rem;color:var(--muted)}
+
+.profile-card{display:flex;flex-direction:column;align-items:center;background:var(--glass);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin:0}
+.profile-card .avatar{width:140px;height:140px;border-radius:9999px;border:3px solid rgba(255,255,255,0.04);object-fit:cover}
 .profile-card .meta{margin-top:8px;text-align:center}
 .profile-card .role{font-weight:700;color:var(--accent)}
 .profile-card .location{font-size:13px;color:var(--muted)}
-.tagline{color:var(--accent);margin:8px 0}
+
 .summary{color:var(--muted)}
 .cta-row{margin-top:18px;display:flex;gap:12px}
 .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
 .btn.primary{background:linear-gradient(90deg,var(--accent),#7dd3fc);color:#021124}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 .btn.link{background:transparent;color:var(--accent);border:0}
-.section{padding:36px 0}
+.section{padding:12px 0}
+
+/* make anchor jumps account for the sticky header */
+main > section { scroll-margin-top: 84px; }
+.skills-list{list-style:disc;padding-left:16px;margin-top:6px;max-width:900px}
+.skills-list li{display:block;margin:4px 0;color:var(--muted);line-height:1.35}
+.skills-list li::marker{color:var(--accent)}
+.skills-list .skill-title{font-weight:700;color:var(--accent);margin-right:8px}
+.skills-list .sep{color:var(--muted);margin:0 6px}
+.skills-list .skill-desc{color:var(--muted)}
+
+@media (max-width:700px){
+  .skills-list{grid-template-columns:1fr}
+}
 .about .bullets{margin-top:12px;color:var(--muted)}
 .about p{ text-align:justify; line-height:1.6; color:var(--muted); max-width:900px }
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px;border:1px solid var(--card-border);transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s cubic-bezier(.2,.9,.2,1),border-color .28s;position:relative;z-index:1}
-.card:hover{transform:translateY(-10px) scale(1.02);box-shadow: var(--card-hover-shadow);border-color:rgba(56,189,248,0.10);z-index:5}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:10px;border:1px solid var(--card-border);transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s cubic-bezier(.2,.9,.2,1),border-color .28s;position:relative;z-index:1}
+.card{
+  /* interactive 3D tilt variables */
+  --rx: 0deg;
+  --ry: 0deg;
+  --reveal-offset: 10; /* px value used by JS when not yet visible */
+  --card-scale: 1.02; /* match profile-card subtle scale */
+  --shine-x: 50%;
+  --shine-y: 20%;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+  padding:12px;border-radius:10px;border:1px solid var(--card-border);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  position:relative;z-index:1;transform-style:preserve-3d;will-change:transform;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(calc(var(--reveal-offset,10) * 1px)) scale(1);
+}
+.card:hover, .card.is-hover{
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-10px) scale(var(--card-scale, 1.06));
+  box-shadow: var(--card-hover-shadow);
+  border-color: rgba(56,189,248,0.10);
+  z-index: 5;
+}
+
+/* Pop keyframe: briefly scale up then settle to hover scale */
+@keyframes card-pop {
+  0% { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px) scale(1); }
+  60% { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-10px) scale(1.12); }
+  100% { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-10px) scale(var(--card-scale,1.06)); }
+}
+.card.popping{ animation: card-pop 220ms cubic-bezier(.2,.9,.2,1); }
 
 /* subtle cyan halo for dark theme to make hover lift clearly visible */
 .card::after{content:"";position:absolute;left:50%;top:50%;width:160%;height:160%;transform:translate(-50%,-50%) scale(0.9);border-radius:18px;pointer-events:none;opacity:0;transition:opacity .28s cubic-bezier(.2,.9,.2,1);background:radial-gradient(closest-side, rgba(56,189,248,0.12), rgba(56,189,248,0.04) 40%, transparent 60%);mix-blend-mode:screen}
 .card:hover::after{opacity:1}
+
+/* subtle specular shine that follows cursor (uses CSS vars set by JS) */
+.card::before{content:"";position:absolute;left:0;top:0;width:100%;height:100%;border-radius:10px;pointer-events:none;opacity:0;transition:opacity .18s ease, background-position .12s ease;background: radial-gradient(600px 240px at var(--shine-x) var(--shine-y), rgba(255,255,255,0.06), rgba(255,255,255,0.02) 20%, transparent 40%);}
+.card:hover::before, .card.is-hover::before{opacity:1}
+
+/* Inner content transitions to mirror profile-card micro-interactions */
+.card h4{transition: transform 220ms ease, color 220ms ease}
+.card p{transition: transform 220ms ease, opacity 220ms ease, color 220ms ease}
+.card:hover h4{transform: translateY(-4px); color: var(--accent)}
+.card:hover p{transform: translateY(-2px); opacity: 0.95}
 
 .light .card:hover{box-shadow: var(--card-hover-shadow);border-color:rgba(6,10,20,0.06)}
 
@@ -98,9 +160,9 @@ html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple
 
 /* Removed debug helper; real hover/focus fallback implemented in JS */
 .timeline{display:flex;flex-direction:column;gap:12px}
-.timeline{position:relative;display:block;padding-left:36px;margin-top:8px}
+.timeline{position:relative;display:block;padding-left:20px;margin-top:4px}
 .timeline::before{content:"";position:absolute;left:16px;top:0;width:2px;height:100%;background:linear-gradient(180deg, rgba(56,189,248,0.6), rgba(56,189,248,0.12));border-radius:2px}
-.timeline-item{background:var(--glass);padding:14px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);position:relative;margin-bottom:18px}
+.timeline-item{background:var(--glass);padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);position:relative;margin-bottom:8px}
 .timeline-item::before{content:"";position:absolute;left:-28px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(56,189,248,0.06)}
 .timeline-item h4{margin:0 0 6px 0}
 .timeline-item .muted{font-size:0.9rem;margin-bottom:8px}
@@ -108,14 +170,22 @@ html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple
 .muted{color:var(--muted)}
 .site-footer{padding:18px 0;color:var(--muted);text-align:center}
 
+/* reduce the gap between consecutive sections for a tighter flow */
+/* consecutive-section negative margin removed to avoid overlap */
+
 /* Rope */
 .rope-wrap{position:relative;width:120px;height:220px;display:flex;align-items:flex-start;justify-content:center}
 .rope{width:100%;height:100%;overflow:visible}
 
 /* Profile card and hero alignment adjustments */
-.profile-card{display:flex;flex-direction:column;align-items:center;background:var(--glass);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-bottom:12px}
+.profile-card{display:flex;flex-direction:column;align-items:center;background:var(--glass);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);margin-bottom:8px}
+
+/* tighten section headings */
+h3{margin:0 0 8px 0;font-size:1.15rem}
+h4{margin:0 0 6px 0;font-size:1rem}
 .profile-card .avatar{width:128px;height:128px;border-radius:9999px;border:3px solid rgba(255,255,255,0.04);object-fit:cover}
 .hero-left{display:flex;flex-direction:column;justify-content:center}
+.hero-right{display:flex;align-items:center;justify-content:center}
 
 /* Modal */
 .modal{position:fixed;inset:0;background:transparent;display:none;align-items:center;justify-content:center;z-index:120;}
@@ -153,7 +223,19 @@ html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple
   opacity: 1;
 }
 .modal-panel{background:linear-gradient(180deg, rgba(4,20,36,0.98), rgba(3,20,38,0.98));}
-.modal-panel h4{color:var(--text)}
+.modal-panel h4{color:var(--text);margin-bottom:8px}
+
+/* Modal content typography and list spacing */
+.modal-panel p{margin:6px 0 10px 0;color:var(--muted);line-height:1.6}
+.modal-panel .role{font-weight:700;color:var(--accent);margin-bottom:6px}
+.modal-panel ul{margin:8px 0 0 1.25rem;padding-left:0}
+.modal-panel li{margin:8px 0;color:var(--muted);line-height:1.5}
+.modal-panel li::marker{color:var(--accent)}
+
+@media (max-width:800px){
+  .modal-panel{padding:16px}
+  .modal-panel ul{margin-left:1rem}
+}
 
 /* Light theme modal adjustments for better contrast */
 .light .modal-panel{background:linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1));box-shadow:0 12px 30px rgba(2,6,23,0.06)}
@@ -161,9 +243,10 @@ html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple
 
 /* responsive */
 @media (max-width:800px){
-  .hero-inner{flex-direction:column}
-  .hero-right{width:220px}
+  .hero-inner{flex-direction:column-reverse;align-items:center;text-align:center}
+  .hero-right{width:180px}
   .profile-card .avatar{width:88px;height:88px}
+  .logo-badge{display:none}
 }
 
 /* subtle entrance: use IntersectionObserver reveal for consistent animations */
@@ -172,14 +255,122 @@ html, body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple
 /* allow cards to animate on hover; hint browser for smoother animations */
 .card{will-change: transform, box-shadow, opacity}
 
-/* reveal helper: elements start hidden with .reveal and animate when .visible is added */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .48s cubic-bezier(.2,.9,.2,1), transform .48s cubic-bezier(.2,.9,.2,1);will-change:opacity,transform}
-/* when revealed, reset transform — but allow hover to override the transform */
-.reveal.visible{opacity:1}
-.reveal.visible:not(:hover){transform:none}
+/* reveal helper: elements start hidden with .reveal and animate when .visible is added
+   Use a per-element CSS variable (--reveal-order) set from JS to stagger animations */
+.reveal{
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-offset, 10) * 1px)) scale(.995);
+  will-change: opacity, transform;
+  transition-property: opacity, transform;
+  transition-duration: 480ms;
+  transition-timing-function: cubic-bezier(.2,.9,.2,1);
+  transition-delay: calc(var(--reveal-order, 0) * 80ms);
+}
+.reveal.visible{
+  opacity: 1;
+  transform: none;
+}
 
-/* scroll reveal helper */
-.reveal{opacity:0;transform:translateY(10px);transition:all .6s ease}
-.reveal.visible{opacity:1}
-.reveal.visible:not(:hover){transform:none}
+/* Contact items styles (Font Awesome icons + links) */
+:root{
+  --contact-text: #222;        /* fallback light-mode contact text */
+  --contact-icon: #0077b5;     /* LinkedIn blue for icons */
+  --contact-hover: #005582;    /* hover color */
+}
+
+/* Final hero layout overrides — enforce consistent, balanced avatar + name alignment */
+.hero-inner{display:flex;align-items:center;gap:28px}
+.hero-right{flex:0 0 auto}
+.hero-left{flex:1}
+
+/* Hero polish overrides (final rules to improve alignment and visual weight) */
+.hero-inner{gap:20px;align-items:center}
+.profile-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:10px;border-radius:12px;border:1px solid var(--card-border);box-shadow:0 8px 20px rgba(2,6,23,0.32);display:flex;flex-direction:column;align-items:center;min-width:100px}
+.profile-card .avatar{width:112px;height:112px;border-radius:9999px;border:3px solid rgba(255,255,255,0.06);object-fit:cover}
+.profile-card .meta{margin-top:8px;text-align:center}
+.profile-card .role{font-weight:700;color:var(--accent);font-size:0.95rem}
+.profile-card .location{font-size:12px;color:var(--muted)}
+.hero-left{padding-left:10px}
+.hero-left h2{font-size:1.7rem;margin:0}
+.tagline{margin-top:6px;color:var(--muted);font-size:0.95rem}
+
+@media (max-width:800px){
+  .hero-inner{flex-direction:column;gap:12px}
+  .profile-card .avatar{width:88px;height:88px}
+  .profile-card{padding:8px;border-radius:10px;box-shadow:none}
+  .hero-left{text-align:center;padding:0}
+  /* reduce motion on small screens */
+  .card{transition:none; --card-scale:1; --rx:0deg; --ry:0deg}
+}
+
+/* Interactive hover/keyboard focus micro-interactions */
+.profile-card{transition:transform 220ms ease, box-shadow 220ms ease}
+.profile-card:hover, .profile-card:focus-within{transform: translateY(-6px) scale(1.02);box-shadow:0 18px 36px rgba(2,6,23,0.28)}
+.profile-card .avatar{transition:transform 220ms ease}
+.profile-card:hover .avatar, .profile-card:focus-within .avatar{transform: scale(1.03)}
+
+/* subtle text transitions for hero */
+.hero-left h2, .hero-left .tagline{transition:opacity 300ms ease, transform 300ms ease}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --contact-text: #f1f1f1;
+    --contact-icon: #66aaff;
+    --contact-hover: #99cfff;
+  }
+}
+
+/* When the page explicitly uses the light theme, make sure contact colors match */
+.light{
+  --contact-text: var(--text);
+  --contact-icon: var(--accent);
+  --contact-hover: var(--accent);
+}
+
+.contact-items{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.contact-items a,
+.contact-items span{
+  text-decoration:none;
+  color:var(--contact-text);
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:color .2s ease;
+}
+
+.contact-items a{
+  background: rgba(255,255,255,0.02);
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--contact-text);
+}
+
+.contact-items a:hover,
+.contact-items a:focus{
+  color:var(--contact-hover);
+  background: rgba(255,255,255,0.04);
+  outline: none;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+.contact-items span{
+  background: transparent;
+  padding:8px 12px;
+  border-radius:999px;
+}
+
+.contact-items i{ font-size:18px; color:var(--contact-icon); }
+
+/* GitHub specific adjustments (darker neutral icon) */
+.contact-items a.github i{ color:var(--muted); }
+.contact-items a.github:hover i{ color:var(--text); }
 

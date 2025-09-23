@@ -4,15 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Dhivya Dharshini — Database Administrator</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+      <!-- Inter font for consistent typography -->
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <h1 class="logo">Dhivya Dharshini</h1>
+        <div class="brand">
+          <h1 class="logo">Dhivya Dharshini</h1>
+        </div>
         <nav class="nav">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
+          <a class="nav-resume" href="document/Dhivyadharshini_DBA_resume.pdf" download aria-label="Download resume (PDF)">Download Resume</a>
           <a href="#contact">Contact</a>
           <button id="themeToggle" class="btn ghost" aria-pressed="false" aria-label="Toggle color theme">🌙</button>
         </nav>
@@ -21,25 +28,19 @@
 
     <section class="hero">
       <div class="container hero-inner">
-        <div class="hero-left">
-          <h2 id="name">Dhivya Dharshini</h2>
-          <p class="tagline">Database Administrator — SQL Server · MySQL · SSIS · SSRS · High Availability</p>
-          <p class="summary">Database Administrator with 3+ years experience managing SQL Server and MySQL databases. Proven in migrations, high availability, performance tuning, and disaster recovery.</p>
-            <div class="cta-row">
-              <a class="btn primary" href="#contact">Hire Me</a>
-              <a class="btn ghost" id="download-resume">Download Resume</a>
-              <a class="btn ghost" href="resume.html" target="_blank">Printable Resume</a>
-            </div>
-        </div>
         <div class="hero-right">
           <div class="profile-card">
-            <!-- <img class="avatar" src="https://avatars.githubusercontent.com/u/96383373?v=4" alt="Dhivya Profile"> -->
             <img class="avatar" src="https://media.licdn.com/dms/image/v2/D5603AQGOBjXA5gSp4w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1712585726969?e=1761782400&v=beta&t=AH3MCmBSeSRwSa9-K-H0NS3ZoqVoloCPT4IT95Uvn4A" alt="Dhivya Profile">
             <div class="meta">
               <div class="role">Database Administrator</div>
               <div class="location">Chennai, India</div>
             </div>
           </div>
+        </div>
+        <div class="hero-left">
+          <h2 id="name">Dhivya Dharshini</h2>
+          <p class="tagline">Database Administrator — SQL Server, MySQL, SSIS, SSRS, High Availability</p>
+            <!-- CTA buttons removed for a cleaner, professional header -->
         </div>
       </div>
     </section>
@@ -48,6 +49,23 @@
       <section id="about" class="container section about">
         <h3>About</h3>
         <p>I’m Dhivya Dharshini, a Database Administrator with 3+ years of experience in SQL Server and MySQL. I specialize in high availability, large-scale migrations, performance tuning, and automation. Certified in MySQL 8.0 (1Z0-908), I’ve led projects ranging from 15TB database migrations to setting up Always On and monitoring systems. I’m passionate about building scalable, reliable, and secure data solutions that empower businesses.</p>
+      </section>
+
+      <section id="skills" class="container section skills">
+        <h3>Key Skills</h3>
+        <ul class="skills-list">
+          <li><span class="skill-title">Database Administration</span><span class="sep">—</span><span class="skill-desc">SQL Server, MySQL 8.0</span></li>
+          <li><span class="skill-title">High Availability &amp; DR</span><span class="sep">—</span><span class="skill-desc">Always On Availability Groups, Log Shipping, Replication, Failover Clustering</span></li>
+          <li><span class="skill-title">Database Migrations</span><span class="sep">—</span><span class="skill-desc">On-prem to Cloud (Azure PaaS, Private Cloud); large-scale migrations (up to 15TB, 500+ DBs)</span></li>
+          <li><span class="skill-title">Performance Tuning</span><span class="sep">—</span><span class="skill-desc">Indexing strategies, query tuning, bottleneck resolution</span></li>
+          <li><span class="skill-title">ETL Development</span><span class="sep">—</span><span class="skill-desc">SSIS package development, migration, and validation</span></li>
+          <li><span class="skill-title">Reporting</span><span class="sep">—</span><span class="skill-desc">SSRS report development, migration, and automation</span></li>
+          <li><span class="skill-title">Backup &amp; Recovery</span><span class="sep">—</span><span class="skill-desc">Full, differential, transactional backups; disaster recovery drills</span></li>
+          <li><span class="skill-title">Monitoring &amp; Alerting</span><span class="sep">—</span><span class="skill-desc">SQL Server and MySQL monitoring systems, proactive alerts</span></li>
+          <li><span class="skill-title">Team Leadership</span><span class="sep">—</span><span class="skill-desc">Leading DBA teams, SLA management, cross-functional coordination</span></li>
+          <li><span class="skill-title">Cloud Databases</span><span class="sep">—</span><span class="skill-desc">Azure SQL Database (administration basics)</span></li>
+          <li><span class="skill-title">Automation &amp; Scripting</span><span class="sep">—</span><span class="skill-desc">Automating reports, health-check retrieval, routine tasks</span></li>
+        </ul>
       </section>
 
       <section class="container section experience">
@@ -124,8 +142,13 @@
 
       <section id="contact" class="container section contact">
         <h3>Contact</h3>
-        <p>Email: <a href="mailto:divyamurugan225@gmail.com">divyamurugan225@gmail.com</a> • Phone: 6383282955 • Chennai, India</p>
-        <p><a href="https://www.linkedin.com/in/dhivyadharshini-muruganandam/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+        <div class="contact-items">
+          <a href="mailto:divyamurugan225@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+          <a href="https://www.linkedin.com/in/dhivyadharshini-muruganandam/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a class="github" href="https://github.com/Dhivya-48" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="tel:+916383282955"><i class="fa-solid fa-phone"></i> Phone</a>
+          <span><i class="fa-solid fa-location-dot"></i> Chennai, India.</span>
+        </div>
       </section>
     </main>
 
