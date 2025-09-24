@@ -88,6 +88,17 @@ const projects = {
       <li>Documented processes, configurations, and troubleshooting steps to ensure knowledge sharing and maintainability across the team.</li>
     </ul>
   `,
+  8: `
+    <h4>Archival & Purging Activity — Manufacturing Client</h4>
+    <p><strong>Role:</strong> Database Engineer / Archival Specialist</p>
+    <ul>
+      <li>Migrated and archived 40+ largest tables (each ranging from 500GB to 1TB) from production environments with minimal downtime.</li>
+      <li>Designed and executed purging strategies and bulk insertion techniques that prevented log file growth while maintaining data integrity.</li>
+      <li>Handled tables with foreign key and primary key constraints, ensuring relational integrity throughout the process.</li>
+      <li>Performed index optimization, index rebuilds, and stored procedure recompilation to enhance performance post-archival.</li>
+      <li>Successfully implemented different approaches to ensure no impact on production workloads during large-scale archival operations.</li>
+    </ul>
+  `,
 }
 
 let lastFocus = null;
