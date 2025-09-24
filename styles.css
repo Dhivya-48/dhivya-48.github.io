@@ -79,15 +79,41 @@
 
 /* make anchor jumps account for the sticky header */
 main > section { scroll-margin-top: 84px; }
-.skills-list{list-style:disc;padding-left:16px;margin-top:6px;max-width:900px}
-.skills-list li{display:block;margin:4px 0;color:var(--muted);line-height:1.35}
-.skills-list li::marker{color:var(--accent)}
-.skills-list .skill-title{font-weight:700;color:var(--accent);margin-right:8px}
-.skills-list .sep{color:var(--muted);margin:0 6px}
-.skills-list .skill-desc{color:var(--muted)}
+/* Key Skills: improved visual grid with badges */
+.skills-list{
+  list-style:none;
+  padding:0;
+  margin-top:12px;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.skills-list li{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border:1px solid rgba(255,255,255,0.03);
+  padding:12px 14px;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  color:var(--muted);
+  line-height:1.4;
+}
+.skills-list .skill-title{
+  display:inline-block;
+  font-weight:700;
+  color:var(--accent);
+  background: rgba(56,189,248,0.06);
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:0.92rem;
+}
+.skills-list .skill-desc{color:var(--muted);margin-top:4px;font-size:0.95rem}
+.skills-list .sep{display:none}
 
 @media (max-width:700px){
-  .skills-list{grid-template-columns:1fr}
+  .skills-list{grid-template-columns:1fr;gap:10px}
 }
 .about .bullets{margin-top:12px;color:var(--muted)}
 .about p{ text-align:justify; line-height:1.6; color:var(--muted); max-width:900px }
